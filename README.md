@@ -1,9 +1,9 @@
 altbeacon-reference
 ===================
 
-##[AltBeacon]((http://altbeacon.org/)) - The Free and Open Proximity Beacon Standard
+## [AltBeacon]((http://altbeacon.org/)) - The Free and Open Proximity Beacon Standard
 
-###Transmit and Receive Reference Scripts
+### Transmit and Receive Reference Scripts
 
 System Requirements: Linux, [BlueZ](http://www.bluez.org/) (Official Linux Bluetooth protocol stack), Bluetooth 4.0 Adapter
 
