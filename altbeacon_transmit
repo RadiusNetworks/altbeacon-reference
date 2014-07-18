@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# AltBeacon - Open BLE Proximity Beacon Profile
+# Transmit Reference Script
+#
+# System Requirements: Linux, BlueZ (Official Linux Bluetooth protocol stack), Bluetooth 4.0 Adapter
+
+# AltBeacon Bluetooth LE advertisement:
+AD_Length_Flags="02"    # Length of Flags AD structure in bytes
+AD_Type_Flags="01"    # Type of AD structure as Flags type
+AD_Data_Flags="1a"    # Flags data LE General Discoverable
+AD_Length_Data="1b"    # Length of Data AD structure in bytes
+AD_Type_Manufacturer_Specific_Data="ff"    # Type of AD structure as Manufacturere Specific Data
+AD_Data_Company_Identifier="18 01"    # Radius Networks company identifier (little endian) 0x0118
+AD_Data_Proximity_Type="ac be"    # Proximity Beacon Advertisement Type 00 (little endian) 0xbeac
+AD_Data_ID1="00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"    # Organizational identifier as 16 byte UUID value
+AD_Data_ID2="00 00"    # Beacon Group as 2 byte value
+AD_Data_ID3="00 00"    # Beacon Unit as 2 byte value
+AD_Data_Reference_Power="00"    # A power measurement as signed byte for beacon device at 1m with a reference device
+AD_Data_Manufacturer_Reserved="00"    # Reserved for use by manufacturer as specified by company identifier in bytes 5-6
+
+# Set up AltBeacon prefix
+AltBeacon_Prefix=`echo "$AD_Length_Flags $AD_Type_Flags $AD_Data_Flags $AD_Length_Data $AD_Type_Manufacturer_Specific_Data $AD_Data_Company_Identifier $AD_Data_Proximity_Type"`
+
+echo "Transmitting AltBeacon profile with the following identifiers:"
+echo "ID1: $AD_Data_ID1"
+echo "ID2: $AD_Data_ID2"
+echo "ID3: $AD_Data_ID3"
+echo "Reserved ID: $AD_Data_Manufacturer_Reserved"
+
+# Set Bluetooth device ID
+BLUETOOTH_DEVICE="hci0"
+
+# Command Bluetooth device up
+sudo hciconfig $BLUETOOTH_DEVICE up
+
+# Stop LE advertising
+sudo hciconfig $BLUETOOTH_DEVICE noleadv
+
+# HCI_LE_Set_Advertising_Data command
+# Command parameters: Advertising_Data_Length (1f), Advertising_Data
+sudo hcitool -i $BLUETOOTH_DEVICE cmd 0x08 0x0008 1f $AltBeacon_Prefix $AD_Data_ID1 $AD_Data_ID2 $AD_Data_ID3 $AD_Data_Reference_Power $AD_Data_Manufacturer_Reserved
+
+# Start LE advertising (non-connectable)
+sudo hciconfig $BLUETOOTH_DEVICE leadv 3
+
