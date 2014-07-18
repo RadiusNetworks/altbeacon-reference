@@ -1,7 +1,7 @@
 altbeacon-reference
 ===================
 
-#AltBeacon - The Free and Open Proximity Beacon Standard
+##AltBeacon - The Free and Open Proximity Beacon Standard
 
 [altbeacon.org](http://altbeacon.org/)
 
