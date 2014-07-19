@@ -31,7 +31,7 @@ echo "Transmitting AltBeacon profile with the following identifiers:"
 echo "ID1: $AD_Data_ID1"
 echo "ID2: $AD_Data_ID2"
 echo "ID3: $AD_Data_ID3"
-echo "Reserved ID: $AD_Data_Manufacturer_Reserved"
+echo "MAN DATA: $AD_Data_Manufacturer_Reserved"
 
 # Set Bluetooth device ID
 BLUETOOTH_DEVICE="hci0"
