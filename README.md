@@ -11,7 +11,7 @@ System Requirements: Linux, [BlueZ](http://www.bluez.org/) (Official Linux Bluet
 
 These shell scripts provide a reference for the AltBeacon standard.  They use the tools provided by BlueZ, the Linux Bluetooth stack, to showcase an AltBeacon implementation on a Linux machine.
 
-`altbeacon-transmit` - Transmit an a BLE proximity beacon with the AltBeacon standard
+`altbeacon-transmit` - Transmit as a BLE proximity beacon with the AltBeacon standard
 
 `altbeacon-receive`  - Detect proximity beacons using the AltBeacon standard
 
