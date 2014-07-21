@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# AltBeacon - The Free and Open Proximity Beacon Standard
+# Transmit Reference Script
+#
+# System Requirements: Linux, BlueZ (Official Linux Bluetooth protocol stack), Bluetooth 4.0 Adapter
+
+if [[ $1 == "parse" ]]; then
+  packet=""
+  capturing=""
+  while read line
+  do
+    if [ "$capturing" ]; then
+      if [[ $line =~ ^[0-9a-fA-F]{2}\ [0-9a-fA-F] ]]; then
+        packet="$packet $line"
+      else
+        if [[ $packet =~ ^04\ 3E\ 2[AB]\ .{1,99}\ 1B\ FF\ .{5}\ AC\ BE ]]; then # Filter for AltBeacon prefix
+	  # Capture identifiers from raw data
+	  ID1=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ \(.\{47\}\).*$/\1/'`
+          ID2=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{47\} \(.\{5\}\).*$/\1/'`
+          ID3=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{53\} \(.\{5\}\).*$/\1/'`
+          POWER=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{59\} \(.\{2\}\).*$/\1/'`
+	  MAN_DATA=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{62\} \(.\{2\}\).*$/\1/'`
+          RSSI=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{65\} \(.\{2\}\).*$/\1/'`
+	  # Convert from raw hex to human readable format
+          ID1=`echo $ID1 | sed -e 's/\ //g' -e 's/^\(.\{8\}\)\(.\{4\}\)\(.\{4\}\)\(.\{4\}\)\(.\{12\}\)$/\1-\2-\3-\4-\5/'`
+          ID2=`echo $ID2 | sed 's/\ //g'`
+          ID2=`echo "ibase=16; $ID2" | bc`
+          ID3=`echo $ID3 | sed 's/\ //g'`
+          ID3=`echo "ibase=16; $ID3" | bc`
+          POWER=`echo "ibase=16; $POWER" | bc`
+          POWER=$[POWER - 256]
+	  MAN_DATA=`echo "ibase=16; $MAN_DATA" | bc`
+	  RSSI=`echo "ibase=16; $RSSI" | bc`
+	  RSSI=$[RSSI - 256]
+          # Display identifiers
+    	  echo "ID1: $ID1 ID2: $ID2 ID3: $ID3 POWER: $POWER MAN_DATA: $MAN_DATA RSSI: $RSSI"
+        fi
+        capturing=""
+        packet=""
+      fi
+    fi
+    if [ ! "$capturing" ]; then
+      if [[ $line =~ ^\> ]]; then
+        packet=`echo $line | sed 's/^>.\(.*$\)/\1/'`
+        capturing=1
+      fi
+    fi
+  done
+else
+  sudo hcitool lescan --duplicates 1>/dev/null &
+  lescan_pid=$!
+  sudo hcidump --raw | ./$0 parse $1
+fi
+trap "sudo kill $lescan_pid" EXIT
