@@ -16,12 +16,12 @@ if [[ $1 == "parse" ]]; then
       else
         if [[ $packet =~ ^04\ 3E\ 2[AB]\ .{1,99}\ 1B\ FF\ .{5}\ BE\ AC ]]; then # Filter for AltBeacon prefix
 	  # Capture identifiers from raw data
-	  ID1=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ \(.\{47\}\).*$/\1/'`
-          ID2=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{47\} \(.\{5\}\).*$/\1/'`
-          ID3=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{53\} \(.\{5\}\).*$/\1/'`
-          POWER=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{59\} \(.\{2\}\).*$/\1/'`
-	  MAN_DATA=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{62\} \(.\{2\}\).*$/\1/'`
-          RSSI=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ AC\ BE\ .\{65\} \(.\{2\}\).*$/\1/'`
+	  ID1=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ \(.\{47\}\).*$/\1/'`
+          ID2=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{47\} \(.\{5\}\).*$/\1/'`
+          ID3=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{53\} \(.\{5\}\).*$/\1/'`
+          POWER=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{59\} \(.\{2\}\).*$/\1/'`
+	  MAN_DATA=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{62\} \(.\{2\}\).*$/\1/'`
+          RSSI=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{65\} \(.\{2\}\).*$/\1/'`
 	  # Convert from raw hex to human readable format
           ID1=`echo $ID1 | sed -e 's/\ //g' -e 's/^\(.\{8\}\)\(.\{4\}\)\(.\{4\}\)\(.\{4\}\)\(.\{12\}\)$/\1-\2-\3-\4-\5/'`
           ID2=`echo $ID2 | sed 's/\ //g'`
