@@ -1,7 +1,8 @@
 altbeacon-reference
 ===================
 
-### [AltBeacon](http://altbeacon.org/) - The Free and Open Proximity Beacon Standard
+### [AltBeacon](http://altbeacon.org/) - The Open and Interoperable Proximity Beacon Specification
+
 
 #### Transmit and Receive Reference Scripts
 
