@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# AltBeacon - The Free and Open Proximity Beacon Standard
+# AltBeacon - The Open and Interoperable Proximity Beacon Specification
+#
 # Transmit Reference Script
 #
 # System Requirements: Linux, BlueZ (Official Linux Bluetooth protocol stack), Bluetooth 4.0 Adapter
