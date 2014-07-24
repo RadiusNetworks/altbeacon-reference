@@ -18,14 +18,13 @@ These shell scripts provide a reference for the AltBeacon standard.  They use th
 
 For more information on the AltBeacon specification, visit the public [AltBeacon spec](https://github.com/AltBeacon/spec) repo hosted on GitHub
 
-Note: the 20-byte beacon identifier has been subdivided into three parts in this example for interoperability
+**Note**: the 20-byte beacon identifier has been subdivided into three parts in this example for interoperability
 
 
 
+Copyright &copy; 2014 by Radius Networks
 
-
-<sup>This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).</sup>
-
+This software is licensed under an adapted BSD license, the Attribution Assurance License.  See the [LICENSE](LICENSE) for details.
 
 
 
