@@ -21,7 +21,7 @@ if [[ $1 == "parse" ]]; then
           ID2=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{47\} \(.\{5\}\).*$/\1/'`
           ID3=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{53\} \(.\{5\}\).*$/\1/'`
           POWER=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{59\} \(.\{2\}\).*$/\1/'`
-	  MAN_DATA=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{62\} \(.\{2\}\).*$/\1/'`
+	  RESERVED=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{62\} \(.\{2\}\).*$/\1/'`
           RSSI=`echo $packet | sed 's/^.\{1,99\}\ 1B\ FF\ .\{5\}\ BE\ AC\ .\{65\} \(.\{2\}\).*$/\1/'`
 	  # Convert from raw hex to human readable format
           ID1=`echo $ID1 | sed -e 's/\ //g' -e 's/^\(.\{8\}\)\(.\{4\}\)\(.\{4\}\)\(.\{4\}\)\(.\{12\}\)$/\1-\2-\3-\4-\5/'`
@@ -31,11 +31,11 @@ if [[ $1 == "parse" ]]; then
           ID3=`echo "ibase=16; $ID3" | bc`
           POWER=`echo "ibase=16; $POWER" | bc`
           POWER=$[POWER - 256]
-	  MAN_DATA=`echo "ibase=16; $MAN_DATA" | bc`
+	  RESERVED=`echo "ibase=16; $RESERVED" | bc`
 	  RSSI=`echo "ibase=16; $RSSI" | bc`
 	  RSSI=$[RSSI - 256]
           # Display identifiers
-    	  echo "ID1: $ID1 ID2: $ID2 ID3: $ID3 POWER: $POWER MAN_DATA: $MAN_DATA RSSI: $RSSI"
+    	  echo "ID1: $ID1 ID2: $ID2 ID3: $ID3 POWER: $POWER MFG_RESERVED: $RESERVED RSSI: $RSSI"
         fi
         capturing=""
         packet=""
