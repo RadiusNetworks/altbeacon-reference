@@ -13,7 +13,7 @@ AD_Data_Flags="1a"    # Flags data LE General Discoverable
 
 # AltBeacon Advertisement
 AD_Length_Data="1b"    # Length of Data AD structure in bytes
-AD_Type_Manufacturer_Specific_Data="ff"    # Type of AD structure as Manufacturere Specific Data
+AD_Type_Manufacturer_Specific_Data="ff"    # Type of AD structure as Manufacturer Specific Data
 AD_Data_Company_Identifier="18 01"    # Company identifier (little endian).  Radius Networks ID used for example (0x0118).  Substitute your assigned manufacturer code, if available.
 AD_Data_Proximity_Type="be ac"    # AltBeacon advertisement code.  Big endian representation of 0xBEAC
 # Note: the 20-byte beacon identifier has been subdivided into three parts in this example for interoperability
