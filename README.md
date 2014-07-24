@@ -20,7 +20,7 @@ For more information on the AltBeacon specification, visit the public [AltBeacon
 
 **Note**: the 20-byte beacon identifier has been subdivided into three parts in this example for interoperability
 
-
+***
 
 Copyright &copy; 2014 by Radius Networks
 
