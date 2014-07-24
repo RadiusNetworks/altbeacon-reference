@@ -1,16 +1,17 @@
-altbeacon-reference
+AltBeacon Reference
 ===================
 
-### [AltBeacon](http://altbeacon.org/) - The Open and Interoperable Proximity Beacon Specification
+#### [AltBeacon](http://altbeacon.org/) - The Open and Interoperable Proximity Beacon Specification
 
+Transmit and Receive Reference Scripts
 
-#### Transmit and Receive Reference Scripts
+## System Requirements
 
-System Requirements: Linux, [BlueZ](http://www.bluez.org/) (Official Linux Bluetooth protocol stack), Bluetooth 4.0 Adapter
+Linux, [BlueZ](http://www.bluez.org/) (Official Linux Bluetooth protocol stack), Bluetooth 4.0 Adapter
 
-***
+## About
 
-These shell scripts provide a reference for the AltBeacon standard.  They use the tools provided by BlueZ, the Linux Bluetooth stack, to showcase an AltBeacon implementation on a Linux machine.
+These Linux shell scripts provide a reference for the AltBeacon standard.  They use the tools provided by BlueZ, the Linux Bluetooth stack, to showcase an AltBeacon implementation on a Linux machine.
 
 `altbeacon-transmit` - Transmit as a BLE proximity beacon with the AltBeacon standard
 
@@ -20,11 +21,21 @@ For more information on the AltBeacon specification, visit the public [AltBeacon
 
 **Note**: the 20-byte beacon identifier has been subdivided into three parts in this example for interoperability
 
-***
+## License
 
-Copyright &copy; 2014 by Radius Networks
+    Copyright 2014 Radius Networks
 
-This software is licensed under an adapted BSD license, the Attribution Assurance License.  See the [LICENSE](LICENSE) for details.
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
+        http://www.apache.org/licenses/LICENSE-2.0
 
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    
+This software is available under the Apache License 2.0, see [LICENSE](LICENSE) for details.
 
